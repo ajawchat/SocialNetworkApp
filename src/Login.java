@@ -64,7 +64,7 @@ public class Login extends JFrame {
 	                .addComponent(arg[0])
 	        );
 
-		groupLayout.setVerticalGroup(groupLayout.createParallelGroup(CENTER)
+		groupLayout.setVerticalGroup(groupLayout.createSequentialGroup()
 	                .addComponent(welcomeLabel)
 	                .addComponent(arg[0])
 	        );
