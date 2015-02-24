@@ -11,6 +11,7 @@ import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 
@@ -24,94 +25,51 @@ public class Login extends JFrame implements ActionListener {
 	
 	private void loginPage(){
 		
+		JPanel panel = new JPanel();
+		this.add(panel);
 		
-		
-		JButton submitButton = new JButton("Submit");
-		submitButton.setToolTipText("Submit Credentials");
-		
-		
-		JTextField uname = new JTextField(20);
-		
-		
-		
-		JTextField password = new JTextField(40);
-		
-		
-		
-		submitButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				System.out.println("Button Pressed");
-			}
-		});
-		
-		
-		// Initialize the layout
-		createLayout(submitButton, uname, password);
-		
+		createLayout(panel);
 		
 		setTitle("My Social Network App");
 		setSize(500,500);
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		setVisible(true);
+		
+		
 	}
 	
 	
-	private void createLayout(JComponent...arg) {
+	private void createLayout(JPanel panel) {
 		
-		Container mainPanel = getContentPane();
-		GroupLayout groupLayout = new GroupLayout(mainPanel);
-		
-		mainPanel.setLayout(groupLayout);
-		groupLayout.setAutoCreateContainerGaps(true);
-		
-		// A new label to display messages
-		JLabel welcomeLabel = new JLabel("Welcome...Please enter your details");
-		welcomeLabel.setSize(50, 20);
-		welcomeLabel.setFont(new Font("Serif", Font.PLAIN, 14));
-		welcomeLabel.setForeground(new Color(50, 50, 25));
-		
-		
-		JLabel welcomeLabel1 = new JLabel("Welcome...Please enter your details");
-		welcomeLabel1.setSize(50, 20);
-		welcomeLabel1.setFont(new Font("Serif", Font.PLAIN, 14));
-		welcomeLabel1.setForeground(new Color(50, 50, 25));
-		
-		JLabel welcomeLabel2 = new JLabel("Welcome...Please enter your details");
-		welcomeLabel2.setSize(50, 20);
-		welcomeLabel2.setFont(new Font("Serif", Font.PLAIN, 14));
-		welcomeLabel2.setForeground(new Color(50, 50, 25));
-		
-		
-		groupLayout.setHorizontalGroup(groupLayout.createParallelGroup(GroupLayout.Alignment.CENTER)
-				.addComponent(welcomeLabel)
-                .addComponent(arg[1])
-                .addComponent(arg[2])
-                .addComponent(arg[0])
-	        );
+		panel.setLayout(null);
+		JLabel userLabel = new JLabel("User");
+		userLabel.setBounds(10, 10, 80, 25);
+		panel.add(userLabel);
+				
+		JTextField userText = new JTextField(20);
+		userText.setBounds(100, 10, 160, 25);
+		panel.add(userText);
 
-		groupLayout.setVerticalGroup(groupLayout.createSequentialGroup()
-	                .addComponent(welcomeLabel)
-	                .addComponent(arg[1])
-	                .addComponent(arg[2])
-	                .addComponent(arg[0])
-	                
-	                
-	        );
+		JLabel passwordLabel = new JLabel("Password");
+		passwordLabel.setBounds(10, 40, 80, 25);
+		panel.add(passwordLabel);
+
+		JPasswordField passwordText = new JPasswordField(20);
+		passwordText.setBounds(100, 40, 160, 25);
+		panel.add(passwordText);
+
+		JButton loginButton = new JButton("Submit");
+		loginButton.setBounds(10, 80, 80, 25);
+		panel.add(loginButton);
 		
-		
-		
+		JButton registerButton = new JButton("Register");
+		registerButton.setBounds(180, 80, 80, 25);
+		panel.add(registerButton);
 		
 	}
 
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable(){
-			public void run(){
-				Login login = new Login();
-				login.setVisible(true);
-			}
-		});
-
-	}
+	
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
