@@ -18,10 +18,18 @@ import javax.swing.JTextField;
 
 public class Login extends JFrame implements ActionListener {
 	
+	private Controller controller;
+	
 	
 	public Login(){
 		loginPage();
 	}
+	
+	// Set the controller object to reference for authentication
+	public void setController(Controller controller){
+		this.controller = controller;
+	}
+	
 	
 	private void loginPage(){
 		
@@ -47,7 +55,7 @@ public class Login extends JFrame implements ActionListener {
 		userLabel.setBounds(10, 10, 80, 25);
 		panel.add(userLabel);
 				
-		JTextField userText = new JTextField(20);
+		final JTextField userText = new JTextField(20);
 		userText.setBounds(100, 10, 160, 25);
 		panel.add(userText);
 
@@ -55,7 +63,7 @@ public class Login extends JFrame implements ActionListener {
 		passwordLabel.setBounds(10, 40, 80, 25);
 		panel.add(passwordLabel);
 
-		JPasswordField passwordText = new JPasswordField(20);
+		final JPasswordField passwordText = new JPasswordField(20);
 		passwordText.setBounds(100, 40, 160, 25);
 		panel.add(passwordText);
 
@@ -67,6 +75,29 @@ public class Login extends JFrame implements ActionListener {
 		registerButton.setBounds(180, 80, 80, 25);
 		panel.add(registerButton);
 		
+		
+		registerButton.addActionListener(new ActionListener() {
+			
+			public void actionPerformed(ActionEvent arg0) {
+				System.out.println("Pressed register");
+				
+			}
+		});
+		
+		 
+		
+		loginButton.addActionListener(new ActionListener() {
+			
+			public void actionPerformed(ActionEvent arg0) {
+				String userName = userText.getText();
+				System.out.println("Pressed loginButton");
+				System.out.println(userName);
+				
+			}
+		});
+		
+		
+		
 	}
 
 	
@@ -76,5 +107,7 @@ public class Login extends JFrame implements ActionListener {
 		// TODO Auto-generated method stub
 		
 	}
+	
+	
 
 }
