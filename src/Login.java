@@ -11,10 +11,11 @@ import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 
 
-public class Login extends JFrame {
+public class Login extends JFrame implements ActionListener {
 	
 	
 	public Login(){
@@ -28,6 +29,15 @@ public class Login extends JFrame {
 		JButton submitButton = new JButton("Submit");
 		submitButton.setToolTipText("Submit Credentials");
 		
+		
+		JTextField uname = new JTextField(20);
+		
+		
+		
+		JTextField password = new JTextField(40);
+		
+		
+		
 		submitButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("Button Pressed");
@@ -36,7 +46,7 @@ public class Login extends JFrame {
 		
 		
 		// Initialize the layout
-		createLayout(submitButton);
+		createLayout(submitButton, uname, password);
 		
 		
 		setTitle("My Social Network App");
@@ -52,21 +62,40 @@ public class Login extends JFrame {
 		GroupLayout groupLayout = new GroupLayout(mainPanel);
 		
 		mainPanel.setLayout(groupLayout);
-		groupLayout.setAutoCreateGaps(true);
+		groupLayout.setAutoCreateContainerGaps(true);
 		
 		// A new label to display messages
 		JLabel welcomeLabel = new JLabel("Welcome...Please enter your details");
+		welcomeLabel.setSize(50, 20);
 		welcomeLabel.setFont(new Font("Serif", Font.PLAIN, 14));
 		welcomeLabel.setForeground(new Color(50, 50, 25));
 		
-		groupLayout.setHorizontalGroup(groupLayout.createSequentialGroup()
-	                .addComponent(welcomeLabel)
-	                .addComponent(arg[0])
+		
+		JLabel welcomeLabel1 = new JLabel("Welcome...Please enter your details");
+		welcomeLabel1.setSize(50, 20);
+		welcomeLabel1.setFont(new Font("Serif", Font.PLAIN, 14));
+		welcomeLabel1.setForeground(new Color(50, 50, 25));
+		
+		JLabel welcomeLabel2 = new JLabel("Welcome...Please enter your details");
+		welcomeLabel2.setSize(50, 20);
+		welcomeLabel2.setFont(new Font("Serif", Font.PLAIN, 14));
+		welcomeLabel2.setForeground(new Color(50, 50, 25));
+		
+		
+		groupLayout.setHorizontalGroup(groupLayout.createParallelGroup(GroupLayout.Alignment.CENTER)
+				.addComponent(welcomeLabel)
+                .addComponent(arg[1])
+                .addComponent(arg[2])
+                .addComponent(arg[0])
 	        );
 
 		groupLayout.setVerticalGroup(groupLayout.createSequentialGroup()
 	                .addComponent(welcomeLabel)
+	                .addComponent(arg[1])
+	                .addComponent(arg[2])
 	                .addComponent(arg[0])
+	                
+	                
 	        );
 		
 		
@@ -82,6 +111,12 @@ public class Login extends JFrame {
 			}
 		});
 
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent arg0) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
