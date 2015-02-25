@@ -63,7 +63,7 @@ public class Login extends JFrame implements ActionListener {
 		passwordLabel.setBounds(10, 40, 80, 25);
 		panel.add(passwordLabel);
 
-		final JPasswordField passwordText = new JPasswordField(20);
+		final JTextField passwordText = new JTextField(20);
 		passwordText.setBounds(100, 40, 160, 25);
 		panel.add(passwordText);
 
@@ -87,11 +87,12 @@ public class Login extends JFrame implements ActionListener {
 		 
 		
 		loginButton.addActionListener(new ActionListener() {
-			
 			public void actionPerformed(ActionEvent arg0) {
 				String userName = userText.getText();
+				String password = passwordText.getText();
 				System.out.println("Pressed loginButton");
-				System.out.println(userName);
+				
+				controller.authenticateCredentials(userName, password);
 				
 			}
 		});

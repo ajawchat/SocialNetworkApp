@@ -22,12 +22,13 @@ public class Controller {
 		// connect to Model to retrieve from DB
 		
 		// This is temporary logic
-		if(userName == "ajawchat" && password == "abc"){
+		if(userName.equals("ajawchat") && password.equals("abc")){
 			// Authenticated correctly
 			System.out.println("Correct Credentials");
 		}
 		else{
 			// Display error message
+			System.out.println("Incorrect");
 		}
 	}
 	
