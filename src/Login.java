@@ -4,6 +4,8 @@ import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.net.UnknownHostException;
+
 import static javax.swing.GroupLayout.Alignment.CENTER;
 import javax.swing.GroupLayout;
 import javax.swing.JButton;
@@ -13,6 +15,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+
+import org.json.simple.parser.ParseException;
 
 
 
@@ -92,7 +96,13 @@ public class Login extends JFrame implements ActionListener {
 				String password = passwordText.getText();
 				System.out.println("Pressed loginButton");
 				
-				controller.authenticateCredentials(userName, password);
+				try {
+					controller.authenticateCredentials(userName, password);
+				} catch (UnknownHostException e) {
+					e.printStackTrace();
+				} catch (ParseException e) {
+					e.printStackTrace();
+				}
 				
 			}
 		});
