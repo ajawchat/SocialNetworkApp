@@ -50,53 +50,14 @@ public class DataModel {
 	}
 	
 	
-	public static void main(String[] args) throws ParseException, IOException{
-		
-		/*
-		String uname = "ajawchat";
-		String pass = "123";
-		
-		MongoClient mongoClient = new MongoClient("localhost",27017);
-		DB db = mongoClient.getDB("SocialNetworkAppDB");
-		
-		DBCollection collection = db.getCollection("Credentials");
+	/*public static void main(String[] args) throws ParseException, IOException{
 		
 		
-
-		DBCursor cursor = collection.find(query);
-		
-		JSONParser jsonParser = new JSONParser();
-		
-		
-		
-		
-		try {
-		   while(cursor.hasNext()) {
-			   jsonObject = (JSONObject) jsonParser.parse(cursor.next().toString());
-			   String password = (String) jsonObject.get("password");
-			   if(password.equals("123"))
-				   System.out.println("matched");
-			   else
-				   System.out.println("not matched");
-		       //System.out.println(cursor.next());
-		   }
-		} finally {
-		   cursor.close();
-		}
-		
-		
-		// Inserting a document
-		BasicDBObject doc = new BasicDBObject("uname", "pathak")
-        		.append("password", "567");
-		collection.insert(doc);
-		
-		*/
-		// parsing the document as a json object
 		
 		DataModel model = new DataModel();
 		System.out.println(model.authenticateCredentials("ajinkya", "123"));
 		
 		
-	}
+	}*/
 
 }

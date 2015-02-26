@@ -8,16 +8,34 @@ public class Controller {
 	
 	private Login loginPage;
 	private DataModel model;
+	private RegistrationPage register;
 	
 	// Constructor
 	public Controller(){
 		
 	}
 	
+	public void setRegistrationPage(RegistrationPage register){
+		this.register = register;
+	}
+	
 	
 	public void setModel(DataModel model){
 		this.model = model;
 	}
+	
+	
+	// Opens up the registration page when clicked from the login page
+	public void openRegistrationPage(){
+		System.out.println("Opening registration page soon");
+		register.loadRegistrationPage();
+		register.setVisible(true);
+		
+		// Stop running the login page
+		loginPage.setVisible(false);
+		
+	}
+	
 	
 	
 	// This is the point of entry
@@ -49,10 +67,12 @@ public class Controller {
 		
 		Controller controller = new Controller();
 		Login loginPage = new Login();
+		RegistrationPage register = new RegistrationPage();
 		
 		loginPage.setController(controller);
 		controller.setModel(model);
 		controller.displayLoginPage(loginPage);
+		controller.setRegistrationPage(register);
 		
 		
 	}

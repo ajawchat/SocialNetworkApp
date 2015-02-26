@@ -34,7 +34,7 @@ public class Login extends JFrame implements ActionListener {
 		this.controller = controller;
 	}
 	
-	
+	// Creates and initializes the panel for the login page
 	private void loginPage(){
 		
 		JPanel panel = new JPanel();
@@ -83,8 +83,7 @@ public class Login extends JFrame implements ActionListener {
 		registerButton.addActionListener(new ActionListener() {
 			
 			public void actionPerformed(ActionEvent arg0) {
-				System.out.println("Pressed register");
-				
+				controller.openRegistrationPage();
 			}
 		});
 		
