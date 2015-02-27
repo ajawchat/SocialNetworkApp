@@ -10,10 +10,20 @@ import javax.swing.JTextField;
 
 public class RegistrationPage extends JFrame implements ActionListener {
 	
+	private Controller controller;
+	private String registrationStatus;
+	
+	
 	public void actionPerformed(ActionEvent arg0) {
 		// TODO Auto-generated method stub
 		
 	}
+	
+	
+	public void setController(Controller controller){
+		this.controller = controller;
+	}
+	
 	
 	// Constructor
 	public RegistrationPage(){
@@ -50,7 +60,7 @@ public class RegistrationPage extends JFrame implements ActionListener {
 		nameLabel.setBounds(10, 10, 80, 25);
 		panel.add(nameLabel);
 		
-		JTextField nameText = new JTextField(20);
+		final JTextField nameText = new JTextField(20);
 		nameText.setBounds(100, 10, 160, 25);
 		panel.add(nameText);
 		
@@ -59,7 +69,7 @@ public class RegistrationPage extends JFrame implements ActionListener {
 		JLabel cityLabel = new JLabel("City: ");
 		cityLabel.setBounds(10, 35, 80, 25);
 		panel.add(cityLabel);
-		JTextField cityText = new JTextField(20);
+		final JTextField cityText = new JTextField(20);
 		cityText.setBounds(100, 35, 160, 25);
 		panel.add(cityText);
 		
@@ -69,7 +79,7 @@ public class RegistrationPage extends JFrame implements ActionListener {
 		stateLabel.setBounds(10, 60, 80, 25);
 		panel.add(stateLabel);
 		
-		JTextField stateText = new JTextField(20);
+		final JTextField stateText = new JTextField(20);
 		stateText.setBounds(100, 60, 160, 25);
 		panel.add(stateText);
 		
@@ -79,7 +89,7 @@ public class RegistrationPage extends JFrame implements ActionListener {
 		userNameLabel.setBounds(10, 85, 80, 25);
 		panel.add(userNameLabel);
 		
-		JTextField userNameText = new JTextField(20);
+		final JTextField userNameText = new JTextField(20);
 		userNameText.setBounds(100, 85, 160, 25);
 		panel.add(userNameText);
 		
@@ -88,9 +98,15 @@ public class RegistrationPage extends JFrame implements ActionListener {
 		passwordLabel.setBounds(10, 110, 80, 25);
 		panel.add(passwordLabel);
 		
-		JTextField passwordText = new JTextField(20);
+		final JTextField passwordText = new JTextField(20);
 		passwordText.setBounds(100, 110, 160, 25);
 		panel.add(passwordText);
+		
+		
+		JLabel statusLabel = new JLabel("");
+		statusLabel.setBounds(10, 180, 180, 35);
+		panel.add(statusLabel);
+		
 		
 		
 		JButton registerButton = new JButton("Register");
@@ -98,7 +114,16 @@ public class RegistrationPage extends JFrame implements ActionListener {
 		panel.add(registerButton);
 		
 		
+		registerButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				registrationStatus = controller.registerNewUser(nameText.getText(), cityText.getText(), stateText.getText(), userNameText.getText(), passwordText.getText());
+			}
+		});
+		
 	}
+	
+	
+	
 
 
 	/*

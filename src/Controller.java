@@ -15,8 +15,18 @@ public class Controller {
 		
 	}
 	
+	
+	
 	public void setRegistrationPage(RegistrationPage register){
 		this.register = register;
+	}
+	
+	public String registerNewUser(String name, String city, String state, String userName, String password){
+		// Check if username already exists
+		
+		
+		
+		return "";
 	}
 	
 	

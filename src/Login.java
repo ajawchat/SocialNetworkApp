@@ -43,7 +43,7 @@ public class Login extends JFrame implements ActionListener {
 		createLayout(panel);
 		
 		setTitle("My Social Network App");
-		setSize(500,500);
+		setSize(300,200);
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setVisible(true);
@@ -72,11 +72,11 @@ public class Login extends JFrame implements ActionListener {
 		panel.add(passwordText);
 
 		JButton loginButton = new JButton("Submit");
-		loginButton.setBounds(10, 80, 80, 25);
+		loginButton.setBounds(10, 80, 100, 25);
 		panel.add(loginButton);
 		
 		JButton registerButton = new JButton("Register");
-		registerButton.setBounds(180, 80, 80, 25);
+		registerButton.setBounds(160, 80, 100, 25);
 		panel.add(registerButton);
 		
 		

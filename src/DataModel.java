@@ -25,6 +25,12 @@ public class DataModel {
 	private JSONParser jsonParser;
 	private JSONObject jsonObject;
 	
+	
+	public void userNameExists(String userName){
+		
+	}
+	
+	
 	// This takes the credentials as string and returns True or False based on whether it authenticated or not
 	public boolean authenticateCredentials(String userName, String password) throws UnknownHostException, ParseException{
 		
