@@ -21,6 +21,7 @@ public class RegistrationPage extends JFrame implements ActionListener {
 	
 	
 	public void setController(Controller controller){
+		//System.out.println("controller initiated");
 		this.controller = controller;
 	}
 	
@@ -116,9 +117,7 @@ public class RegistrationPage extends JFrame implements ActionListener {
 		
 		registerButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				String userName = userNameText.getText();
-				//String password = passwordText.getText();
-				registrationStatus = controller.registerNewUser(userName);
+				registrationStatus = controller.registerNewUser(nameText.getText(), cityText.getText(), stateText.getText(), userNameText.getText(), passwordText.getText());
 				
 				if(!registrationStatus.equals("")){
 					statusLabel.setText(registrationStatus);
