@@ -23,7 +23,7 @@ public class Controller {
 	
 	
 	
-	public String registerNewUser(String userName){
+	public String registerNewUser(String name, String city, String state, String userName, String password){
 		// Check if username already exists
 		boolean exists = model.userNameExists(userName);
 		
@@ -88,6 +88,7 @@ public class Controller {
 		Controller controller = new Controller();
 		Login loginPage = new Login();
 		RegistrationPage register = new RegistrationPage();
+		register.setController(controller);
 		
 		loginPage.setController(controller);
 		controller.setModel(model);
