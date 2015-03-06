@@ -103,7 +103,7 @@ public class RegistrationPage extends JFrame implements ActionListener {
 		panel.add(passwordText);
 		
 		
-		JLabel statusLabel = new JLabel("");
+		final JLabel statusLabel = new JLabel("");
 		statusLabel.setBounds(10, 180, 180, 35);
 		panel.add(statusLabel);
 		
@@ -116,7 +116,14 @@ public class RegistrationPage extends JFrame implements ActionListener {
 		
 		registerButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				registrationStatus = controller.registerNewUser(nameText.getText(), cityText.getText(), stateText.getText(), userNameText.getText(), passwordText.getText());
+				String userName = userNameText.getText();
+				//String password = passwordText.getText();
+				registrationStatus = controller.registerNewUser(userName);
+				
+				if(!registrationStatus.equals("")){
+					statusLabel.setText(registrationStatus);
+				}
+				
 			}
 		});
 		

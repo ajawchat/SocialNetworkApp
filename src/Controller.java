@@ -21,10 +21,20 @@ public class Controller {
 		this.register = register;
 	}
 	
-	public String registerNewUser(String name, String city, String state, String userName, String password){
+	
+	
+	public String registerNewUser(String userName){
 		// Check if username already exists
+		boolean exists = model.userNameExists(userName);
 		
-		
+		// Return the results to the controller
+		if(exists == true){
+			// report username already exists
+			return "UserName already exists";
+		}
+		else{
+			// add the new user with his details
+		}
 		
 		return "";
 	}

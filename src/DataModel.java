@@ -26,7 +26,41 @@ public class DataModel {
 	private JSONObject jsonObject;
 	
 	
-	public void userNameExists(String userName){
+	// Constructor initializes the DB connections
+	public DataModel(){
+		initiateDBConnection();
+		
+	}
+	
+	private void initiateDBConnection() {
+		try {
+			mongoClient = new MongoClient("localhost",27017);
+		} catch (UnknownHostException e) {
+			System.out.println("Issue with Database connection...");
+		}
+		dbConn = mongoClient.getDB("SocialNetworkAppDB");
+	}
+	
+	
+	public boolean userNameExists(String userName){
+		boolean exists = false;
+		collection = dbConn.getCollection("Credentials");
+		DBObject query = new BasicDBObject("uname",userName);
+		jsonParser = new JSONParser();
+		try {
+			DBObject dbObj = collection.findOne(query);
+			if(dbObj != null){
+				jsonObject = (JSONObject) jsonParser.parse(collection.findOne(query).toString());
+				exists = true;
+			}
+			
+		} 
+		catch (ParseException e){ 
+			System.out.println("Error with parsing result json file...");
+		}
+		mongoClient.close();
+		
+		return exists;
 		
 	}
 	
@@ -34,8 +68,6 @@ public class DataModel {
 	// This takes the credentials as string and returns True or False based on whether it authenticated or not
 	public boolean authenticateCredentials(String userName, String password) throws UnknownHostException, ParseException{
 		
-		mongoClient = new MongoClient("localhost",27017);
-		dbConn = mongoClient.getDB("SocialNetworkAppDB");
 		collection = dbConn.getCollection("Credentials");
 		DBObject query = new BasicDBObject("uname",userName);
 		
@@ -56,14 +88,15 @@ public class DataModel {
 	}
 	
 	
-	/*public static void main(String[] args) throws ParseException, IOException{
+	public static void main(String[] args) throws ParseException, IOException{
 		
 		
 		
 		DataModel model = new DataModel();
-		System.out.println(model.authenticateCredentials("ajinkya", "123"));
+		//System.out.println(model.authenticateCredentials("ajinkya", "123"));
+		model.userNameExists("rohan");
 		
 		
-	}*/
+	}
 
 }
