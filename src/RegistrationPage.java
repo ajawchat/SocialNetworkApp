@@ -14,12 +14,6 @@ public class RegistrationPage extends JFrame implements ActionListener {
 	private String registrationStatus;
 	
 	
-	public void actionPerformed(ActionEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
-	
-	
 	public void setController(Controller controller){
 		//System.out.println("controller initiated");
 		this.controller = controller;
@@ -125,6 +119,13 @@ public class RegistrationPage extends JFrame implements ActionListener {
 				
 			}
 		});
+		
+	}
+
+
+	@Override
+	public void actionPerformed(ActionEvent arg0) {
+		// TODO Auto-generated method stub
 		
 	}
 	

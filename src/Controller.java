@@ -34,6 +34,7 @@ public class Controller {
 		}
 		else{
 			// add the new user with his details
+			model.addNewUser(name, city, state, userName, password);
 		}
 		
 		return "";

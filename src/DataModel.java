@@ -42,6 +42,26 @@ public class DataModel {
 	}
 	
 	
+	// Function to add the details of a new user. It returns true if the insert was successful, else it returns false
+	public boolean addNewUser(String name, String city, String state, String userName, String password){
+		collection = dbConn.getCollection("UserProfiles");
+		BasicDBObject document = new BasicDBObject();
+		document.put("Name", name);
+		document.put("City", city);
+		document.put("state", state);
+		document.put("UserName", userName);
+		document.put("Password", password);
+		
+		collection.insert(document);
+		
+		return false;
+	}
+	
+	
+	
+	
+	
+	
 	public boolean userNameExists(String userName){
 		boolean exists = false;
 		collection = dbConn.getCollection("Credentials");
@@ -89,8 +109,6 @@ public class DataModel {
 	
 	
 	public static void main(String[] args) throws ParseException, IOException{
-		
-		
 		
 		DataModel model = new DataModel();
 		//System.out.println(model.authenticateCredentials("ajinkya", "123"));
