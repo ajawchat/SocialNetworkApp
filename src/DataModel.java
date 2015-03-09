@@ -3,6 +3,7 @@
 import java.io.IOException;
 import java.io.Reader;
 import java.net.UnknownHostException;
+import java.nio.file.attribute.UserDefinedFileAttributeView;
 
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -15,6 +16,7 @@ import com.mongodb.DBCollection;
 import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
 import com.mongodb.MongoClient;
+import com.mongodb.WriteResult;
 
 public class DataModel {
 	
@@ -65,16 +67,37 @@ public class DataModel {
 		document.put("State", state);
 		document.put("UserName", userName);
 		document.put("Password", password);
-		collection.insert(document);
+		// Get the WriteResult into a variable
+		WriteResult userDataWrite = collection.insert(document);
 		
 		// Add the user to the Credentials DB
 		collection = dbConn.getCollection("Credentials");
 		BasicDBObject addCredentials = new BasicDBObject();
 		addCredentials.put("UserName", userName);
 		addCredentials.put("Password", password);
-		collection.insert(addCredentials);
+		// Get the WriteResult into a variable
+		WriteResult credentialsWrite = collection.insert(addCredentials);
+				
+		long userdetails = 0;
+		long credentialdetails = 0;
 		
-		return false;
+		// Parse the json received as acknowlegement from the server
+		jsonParser = new JSONParser();
+		try {
+			jsonObject = (JSONObject) jsonParser.parse(userDataWrite.toString());
+			userdetails = (long) jsonObject.get("ok");
+			System.out.println(userdetails);
+			
+			jsonObject = (JSONObject) jsonParser.parse(credentialsWrite.toString());
+			credentialdetails = (long) jsonObject.get("ok");
+			
+		} catch (ParseException e) { e.printStackTrace(); }
+		
+		// if both are 1, then it is successful
+		if(userdetails == 1 && credentialdetails==1)
+			return true;
+		else
+			return false;
 	}
 	
 	
