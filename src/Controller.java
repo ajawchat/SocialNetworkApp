@@ -1,6 +1,15 @@
+import java.io.IOException;
+import java.net.InetSocketAddress;
 import java.net.UnknownHostException;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
+
+import net.spy.memcached.MemcachedClient;
 
 import org.json.simple.parser.ParseException;
+
 
 // This is the controller class for the MVC architecture
 
@@ -10,6 +19,8 @@ public class Controller {
 	private DataModel model;
 	private RegistrationPage register;
 	private AccountPage newAccount;
+	
+	private static final int TIME_IN_CACHE = 60*60*24*30;
 	
 	//==================================================================================================================
 	// Constructor
@@ -42,6 +53,10 @@ public class Controller {
 			// If the data addition is successful, redirect the user to his profile page
 			if(addStatus == true){
 				System.out.println("true");
+				
+				// Once the data is added successfully into the DB, add it to the cache as well for better lookup
+				addDataToCache(userName, password);
+				
 				newAccount.loadAccountPage(userName);
 				newAccount.setVisible(true);
 				register.setVisible(false);
@@ -54,6 +69,22 @@ public class Controller {
 			
 		}
 	}
+	//==================================================================================================================
+	public void addDataToCache(String userName, String password){
+System.out.println("Starting");
+		
+		// Get a memcached client connected to several servers
+		MemcachedClient c = null;
+		try {
+			c = new MemcachedClient(new InetSocketAddress("localhost", 11211));
+		} catch (IOException e1) {
+			System.out.println("Error in adding data to cache...");
+		}
+		
+		c.set(userName,TIME_IN_CACHE,password);
+	
+	}
+	
 	
 	
 	//==================================================================================================================
@@ -91,11 +122,16 @@ public class Controller {
 	//==================================================================================================================
 	public void authenticateCredentials(String userName, String password) throws UnknownHostException, ParseException{
 		// connect to Model to retrieve from DB
-		
+		long startTime = System.currentTimeMillis();
 		boolean authStatus = model.authenticateCredentials(userName, password);
+		long endTime = System.currentTimeMillis();	
+		
+		System.out.println("DB access for credentials took: "+(endTime - startTime));
 		
 		if(authStatus == true){
-			System.out.println("Correct Credentials");
+			newAccount.loadAccountPage(userName);
+			newAccount.setVisible(true);
+			loginPage.setVisible(false);
 		}
 		else{
 			System.out.println("Incorrect");

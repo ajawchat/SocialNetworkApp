@@ -1,3 +1,5 @@
+// This page is loaded when the authentication is successful. It loads the data from the MongoDB server
+
 import java.net.UnknownHostException;
 
 import javax.swing.JFrame;
@@ -14,9 +16,10 @@ import com.mongodb.DBCollection;
 import com.mongodb.DBObject;
 import com.mongodb.MongoClient;
 
-// This page is loaded when the authentication is successful. It loads the data from the MongoDB server
+import net.spy.memcached.*;
 
 public class AccountPage extends JFrame{
+
 	
 	// Users account
 	private String userName;
@@ -47,9 +50,9 @@ public class AccountPage extends JFrame{
 	private void createLayout(JPanel panel) {
 		panel.setLayout(null);
 		
-		System.out.println("inside create layout 1");
+		//System.out.println("inside create layout 1");
 		retrieveData();
-		System.out.println("inside create layout 2");
+		//System.out.println("inside create layout 2");
 		
 		// Name details
 		JLabel nameLabel = new JLabel("Name: ");
@@ -85,14 +88,10 @@ public class AccountPage extends JFrame{
 		
 		DBCollection collection = dbConn.getCollection("UserProfiles");
 		DBObject query = new BasicDBObject("UserName",userName);
-		
-		System.out.println("inside retreive method"); 
-		
 		JSONParser jsonParser = new JSONParser();
 		JSONObject jsonObject = null;
 		try {
 			jsonObject = (JSONObject) jsonParser.parse(collection.findOne(query).toString());
-			System.out.println("Read json");
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
