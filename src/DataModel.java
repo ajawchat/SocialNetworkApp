@@ -132,12 +132,12 @@ public class DataModel {
 	public boolean authenticateCredentials(String userName, String password) throws UnknownHostException, ParseException{
 		
 		collection = dbConn.getCollection("Credentials");
-		DBObject query = new BasicDBObject("uname",userName);
+		DBObject query = new BasicDBObject("UserName",userName);
 		
 		 
 		jsonParser = new JSONParser();
 		jsonObject = (JSONObject) jsonParser.parse(collection.findOne(query).toString());
-		String retrievedPassword = (String) jsonObject.get("password");
+		String retrievedPassword = (String) jsonObject.get("Password");
 		
 		if(retrievedPassword.equals(password)){
 			// authentication succeeded

@@ -116,7 +116,6 @@ public class RegistrationPage extends JFrame implements ActionListener {
 				if(!registrationStatus.equals("")){
 					statusLabel.setText(registrationStatus);
 				}
-				
 			}
 		});
 		

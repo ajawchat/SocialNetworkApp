@@ -41,7 +41,8 @@ public class Controller {
 			
 			// If the data addition is successful, redirect the user to his profile page
 			if(addStatus == true){
-				newAccount.loadAccountPage();
+				System.out.println("true");
+				newAccount.loadAccountPage(userName);
 				newAccount.setVisible(true);
 				register.setVisible(false);
 			}
@@ -126,7 +127,7 @@ public class Controller {
 		controller.setRegistrationPage(register);
 		
 		
-		
+		System.out.println("Done with execution");
 		
 	}
 	
