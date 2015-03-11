@@ -9,19 +9,21 @@ public class Controller {
 	private Login loginPage;
 	private DataModel model;
 	private RegistrationPage register;
+	private AccountPage newAccount;
 	
+	//==================================================================================================================
 	// Constructor
 	public Controller(){
 		
 	}
 	
-	
+	//==================================================================================================================
 	
 	public void setRegistrationPage(RegistrationPage register){
 		this.register = register;
 	}
 	
-	
+	//==================================================================================================================
 	
 	public String registerNewUser(String name, String city, String state, String userName, String password){
 		// Check if username already exists
@@ -34,18 +36,38 @@ public class Controller {
 		}
 		else{
 			// add the new user with his details
-			model.addNewUser(name, city, state, userName, password);
+			System.out.println("In else part");
+			boolean addStatus = model.addNewUser(name, city, state, userName, password);
+			
+			// If the data addition is successful, redirect the user to his profile page
+			if(addStatus == true){
+				newAccount.loadAccountPage();
+				newAccount.setVisible(true);
+				register.setVisible(false);
+			}
+			else
+				System.out.println("Something went wrong with addition of user data");
+			
+			
+			return "User Profile Added";
+			
 		}
-		
-		return "";
 	}
 	
+	
+	//==================================================================================================================
 	
 	public void setModel(DataModel model){
 		this.model = model;
 	}
 	
+	//==================================================================================================================
 	
+	public void setAccountPage(AccountPage newAccount){
+		this.newAccount = newAccount;
+	}
+	
+	//==================================================================================================================
 	// Opens up the registration page when clicked from the login page
 	public void openRegistrationPage(){
 		System.out.println("Opening registration page soon");
@@ -57,7 +79,7 @@ public class Controller {
 		
 	}
 	
-	
+	//==================================================================================================================
 	
 	// This is the point of entry
 	public void displayLoginPage(Login loginPage){
@@ -65,7 +87,7 @@ public class Controller {
 		loginPage.setVisible(true);
 	}
 	
-	
+	//==================================================================================================================
 	public void authenticateCredentials(String userName, String password) throws UnknownHostException, ParseException{
 		// connect to Model to retrieve from DB
 		
@@ -80,21 +102,30 @@ public class Controller {
 	}
 	
 	
-	
+	//==================================================================================================================
 	// Main method of controller to execute the program
 	public static void main(String[] args){
 		
 		DataModel model = new DataModel();
 		
 		Controller controller = new Controller();
+		
 		Login loginPage = new Login();
+		loginPage.setController(controller);
+		
+		
 		RegistrationPage register = new RegistrationPage();
 		register.setController(controller);
 		
-		loginPage.setController(controller);
+		
+		AccountPage newAccount = new AccountPage();
+		
+		controller.setAccountPage(newAccount);
 		controller.setModel(model);
 		controller.displayLoginPage(loginPage);
 		controller.setRegistrationPage(register);
+		
+		
 		
 		
 	}
