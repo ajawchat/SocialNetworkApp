@@ -19,8 +19,7 @@ public class Controller {
 	private DataModel model;
 	private RegistrationPage register;
 	private AccountPage newAccount;
-	
-	private static final int TIME_IN_CACHE = 60*60*24*30;
+	private MemcacheClass cache;
 	
 	//==================================================================================================================
 	// Constructor
@@ -55,7 +54,7 @@ public class Controller {
 				System.out.println("true");
 				
 				// Once the data is added successfully into the DB, add it to the cache as well for better lookup
-				addDataToCache(userName, password);
+				cache.addDataToCache(userName, password);
 				
 				newAccount.loadAccountPage(userName);
 				newAccount.setVisible(true);
@@ -69,23 +68,6 @@ public class Controller {
 			
 		}
 	}
-	//==================================================================================================================
-	public void addDataToCache(String userName, String password){
-System.out.println("Starting");
-		
-		// Get a memcached client connected to several servers
-		MemcachedClient c = null;
-		try {
-			c = new MemcachedClient(new InetSocketAddress("localhost", 11211));
-		} catch (IOException e1) {
-			System.out.println("Error in adding data to cache...");
-		}
-		
-		c.set(userName,TIME_IN_CACHE,password);
-	
-	}
-	
-	
 	
 	//==================================================================================================================
 	
@@ -99,6 +81,12 @@ System.out.println("Starting");
 		this.newAccount = newAccount;
 	}
 	
+	//==================================================================================================================
+	
+	public void setCache(MemcacheClass cache){
+		this.cache = cache;
+	}
+
 	//==================================================================================================================
 	// Opens up the registration page when clicked from the login page
 	public void openRegistrationPage(){
@@ -125,8 +113,14 @@ System.out.println("Starting");
 		long startTime = System.currentTimeMillis();
 		boolean authStatus = model.authenticateCredentials(userName, password);
 		long endTime = System.currentTimeMillis();	
-		
 		System.out.println("DB access for credentials took: "+(endTime - startTime));
+		
+		
+		// Accessing the cache
+		long startTimeC = System.currentTimeMillis();
+		String receivedPassword = cache.getDataFromCache(userName);
+		long endTimeC = System.currentTimeMillis();
+		System.out.println("Cache access for credentials took: "+(endTimeC - startTimeC));
 		
 		if(authStatus == true){
 			newAccount.loadAccountPage(userName);
@@ -153,6 +147,10 @@ System.out.println("Starting");
 		
 		RegistrationPage register = new RegistrationPage();
 		register.setController(controller);
+		
+		
+		MemcacheClass cache = new MemcacheClass();
+		controller.setCache(cache);
 		
 		
 		AccountPage newAccount = new AccountPage();
