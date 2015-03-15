@@ -24,7 +24,6 @@ public class Login extends JFrame implements ActionListener {
 	
 	private Controller controller;
 	
-	
 	public Login(){
 		loginPage();
 	}
@@ -47,8 +46,6 @@ public class Login extends JFrame implements ActionListener {
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setVisible(true);
-		
-		
 	}
 	
 	

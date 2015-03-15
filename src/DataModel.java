@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.Reader;
 import java.net.UnknownHostException;
 import java.nio.file.attribute.UserDefinedFileAttributeView;
+import java.util.logging.Logger;
 
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -28,10 +29,13 @@ public class DataModel {
 	private JSONParser jsonParser;
 	private JSONObject jsonObject;
 	
+	static Logger log;
+	
 	//==================================================================================================================
 	// Constructor initializes the DB connections
 	public DataModel(){
 		initiateDBConnection();
+		log = Logger.getLogger("Data Model");
 	}
 
 	//==================================================================================================================
@@ -41,17 +45,18 @@ public class DataModel {
 			mongoClient = new MongoClient("localhost",27017);
 						
 		} catch (UnknownHostException e) {
-			System.out.println("Issue with Database connection...");
+			log.info("Error in database connection");
 		}
 		dbConn = mongoClient.getDB("SocialNetworkAppDB");
-		System.out.println("Database connection initialized correctly");
+		log.info("Database connection initialized correctly");
+		
 	}
 	
 	//==================================================================================================================
 	// This function terminates the DB connection once the application is terminated
 	public void terminateDBConn(){
 		mongoClient.close();
-		System.out.println("Database connection terminated");
+		log.info("Database connection terminated");
 	}
 	
 	//==================================================================================================================
