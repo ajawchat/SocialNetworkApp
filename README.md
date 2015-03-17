@@ -11,3 +11,5 @@ Features
 * mongoDB: Using MongoDB as the backend database for storing user profile information and credentials
  - I have chosen mongoDB mainly due to the flexibility (schema less database) and the option of horizontal scalability, which is evident in a popular networking site.
  - I also realized the ease of accessing the DB when I started coding the data model for my application
+  
+* Logging using Log4j
