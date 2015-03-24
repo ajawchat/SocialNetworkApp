@@ -6,6 +6,8 @@ Features
  - The cache holds the data for a maximum period of 30 days
  - It usually takes lesser time to access data from the cache, which earlier took 17 ms to access it from the DB
  - In my case, I noticed that the time to access cache was more than the DB access, but that might be because both are loaded on the same system, the data represented in mongoDB is same as that in the cache [key-value pairs of strings]. In cases of more complex data blobs stored in the database, with multiple servers, it would take much lesser time to access the cache [as it has the data in memory rather than on disk].
+ - The caching system Redis could also be used for improving performance. It is very similar to struture to Memcached(in fact it was built on the problems that memcached encountered). The detailed comparison of both caching systems is provided in the link  
+http://www.infoworld.com/article/2825890/application-development/why-redis-beats-memcached-for-caching.html
  
 
 * mongoDB: Using MongoDB as the backend database for storing user profile information and credentials
